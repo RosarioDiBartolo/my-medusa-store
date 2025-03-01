@@ -10,5 +10,13 @@ export default defineMiddlewares({
         three_dimensional_assets: z.array(z.string()),
       },
     },
+    {
+      method: "POST",
+      matcher: "/admin/products/:id",
+      additionalDataValidator: {
+        three_dimensional_assets: z.array(z.string()),
+      },
+    },
+
   ],
 })

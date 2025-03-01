@@ -6,8 +6,8 @@
   "tables": [
     {
       "columns": {
-        "product_id": {
-          "name": "product_id",
+        "id": {
+          "name": "id",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
@@ -57,22 +57,22 @@
           "mappedType": "datetime"
         }
       },
-      "name": "three_dimensional_products",
+      "name": "three_dimensional_product",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "IDX_three_dimensional_products_deleted_at",
+          "keyName": "IDX_three_dimensional_product_deleted_at",
           "columnNames": [],
           "composite": false,
           "constraint": false,
           "primary": false,
           "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_three_dimensional_products_deleted_at\" ON \"three_dimensional_products\" (deleted_at) WHERE deleted_at IS NULL"
+          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_three_dimensional_product_deleted_at\" ON \"three_dimensional_product\" (deleted_at) WHERE deleted_at IS NULL"
         },
         {
-          "keyName": "three_dimensional_products_pkey",
+          "keyName": "three_dimensional_product_pkey",
           "columnNames": [
-            "product_id"
+            "id"
           ],
           "composite": false,
           "constraint": true,

@@ -1,31 +1,34 @@
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import ThreeDimService from "../../../modules/three_dimensional_products/service"
-import { THREE_DIMENSIONAL_MODULE} from "../../../modules/three_dimensional_products"
+import ThreeDimModuleService from "../../../modules/three_dimensional_product/service"
+import { THREE_DIMENSIONAL_MODULE } from "../../../modules/three_dimensional_product"
 
-type CreateCustomStepInput = {
-  custom_name?: string
+type Create3DStepInput = {
+    three_dimensional_assets?: string[]
 }
 
-export const createCustomStep = createStep(
-  "create-custom",
-  async (data: CreateCustomStepInput, { container }) => {
-    if (!data.custom_name) {
+export const create3DStep = createStep(
+  "create-3d-step",
+  async (data: Create3DStepInput, { container }) => {
+    if (!data.three_dimensional_assets) {
       return
     }
 
-    const ThreeDimModuleService: ThreeDimService = container.resolve(
-        THREE_DIMENSIONAL_MODULE
-    )
-
-    const ThreeDimAssets =   []
-
-    return new StepResponse(ThreeDimAssets, ThreeDimAssets)
-  },
-  async (custom, { container }) => {
-    const ThreeDimModuleService: ThreeDimService = container.resolve(
+    const threeDimModuleService: ThreeDimModuleService = container.resolve(
       THREE_DIMENSIONAL_MODULE
     )
 
-    await ThreeDimModuleService.deleteCustoms(custom.id)
-  }
+    const ThreeDimProduct = await threeDimModuleService.createThreeDimensionalProducts(data)
+
+    return new StepResponse(ThreeDimProduct, ThreeDimProduct)
+  },
+  async (ThreeDimProduct, { container }) => {
+    const threeDimModuleService: ThreeDimModuleService = container.resolve(
+      THREE_DIMENSIONAL_MODULE
+    )
+
+    if (ThreeDimProduct){
+        await threeDimModuleService.deleteThreeDimensionalProducts(ThreeDimProduct.id)
+
+    }
+   }
 )

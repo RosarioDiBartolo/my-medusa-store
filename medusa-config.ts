@@ -15,7 +15,7 @@ module.exports = defineConfig({
   },
   modules: [
     {
-      resolve: "./src/modules/three_dimensional_products",
+      resolve: "./src/modules/three_dimensional_product",
     },
 
     {
